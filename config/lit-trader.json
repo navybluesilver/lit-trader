@@ -1,0 +1,31 @@
+{
+  "trader": {
+  "name": "Alice",
+  "coin_type": "1",
+  "ip": "localhost",
+  "port": "8001"
+  },
+  "oracle": {
+  "name": "Navy Blue Silver - XAUBTC",
+  "url": "http://navybluesilver.net:3000",
+  "datasource_id": "18"
+  },
+  "instrument": {
+  "name": "XAUZ18",
+  "underlying":"1 gram of gold",
+  "settlement_time":"1534122900", 
+  "margin":"2"
+  },
+  "web": {
+  "certFile":"/home/navybluesilver/.navybluesilver/cert.pem",
+  "keyFile":"/home/navybluesilver/.navybluesilver/key.pem",
+  "port":":80"
+  },
+  "counterparty": {
+  "name":"Bob",
+  "url":"navybluesilver.net",
+  "ip":"127.0.0.1",
+  "port":2449,
+  "LNAddress":"ln14trudscttguhtktggt2kynua52v6slnq9ljuff"
+  }
+}

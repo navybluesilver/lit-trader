@@ -8,7 +8,7 @@ type Counterparty struct {
 	Name			string //User friendly name
 	LNAddress string
 	IP 				string
-	Port   		uint32
+	Port   		int
 	URL       string //can be blank, but could be used to derive Alias, LNAddress, IP, Port
 }
 

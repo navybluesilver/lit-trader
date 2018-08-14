@@ -1,0 +1,172 @@
+<html>
+<head>
+    <title>{{ .TraderName }} - {{ .Instrument }} </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+
+<body>
+<main>
+<div class="container">
+  <h2>Forward Contract</h2>
+  <table id = "trader" class="table">
+    <h3>Trader</h3>
+    <tr>
+      <th>Name</th>
+      <td>{{ .TraderName }}</td>
+    </tr>
+    <tr>
+      <th>Address</th>
+      <td>{{ .TraderFullAddress }}</td>
+    </tr>
+  </table>
+  <hr>
+  <table id = "counterparty" class="table">
+    <h3>Counterparty</h3>
+    <tr>
+      <th>Name</th>
+      <td>{{ .CounterpartyName }}</td>
+    </tr>
+    <tr>
+      <th>Address</th>
+      <td>{{ .CounterpartyFullAddress }}</td>
+    </tr>
+  </table>
+  <hr>
+  <table id = "instrument" class="table">
+    <h3>Instrument</h3>
+    <tr>
+      <th>Name</th>
+      <td>{{ .Instrument }}</td>
+    </tr>
+    <tr>
+      <th>Underlying</th>
+      <td>{{ .Underlying }}</td>
+    </tr>
+    <tr>
+      <th>Settlement Date</th>
+      <td>{{ .SettlementDate }}</td>
+    </tr>
+    <tr>
+      <th>SPOT</th>
+      <td>{{ .SPOT }}</td>
+    </tr>
+  </table>
+  <hr>
+  <table id = "cash" class="table">
+    <h3>Cash</h3>
+    <tr>
+      <th>Public Key</th>
+      <td>{{ .PublicKey }}</td>
+    </tr>
+    <tr>
+      <th>Witness Public Key</th>
+      <td>{{ .WitnessPublicKey }}</td>
+    </tr>
+    <tr>
+      <th>Satoshis</th>
+      <td>{{ .Cash }}</td>
+    </tr>
+  </table>
+  <table id = "positions" class="table">
+    <h3>Positions</h3>
+    <tr>
+      <th>Size</th>
+      <th>Price</th>
+    </tr>
+    {{- range .Positions }}
+    <tr>
+    <td>{{ .Quantity }}</td>
+    <td>{{ .Price }}</td>
+    </tr>
+    {{- end}}
+  </table>
+  <hr>
+  <table id = "orders" class="table">
+    <h3>Offers</h3>
+    <tr>
+      <th>Size</th>
+      <th>Price</th>
+    </tr>
+    {{- range .Offers }}
+    <tr>
+    <td>{{ .Quantity }}</td>
+    <td>{{ .Price }}</td>
+    </tr>
+    {{- end}}
+  </table>
+  <hr>
+  <table id = "oracle" class="table">
+    <h3>Oracle</h3>
+    <tr>
+      <th>Oracle Name</th>
+      <td>{{ .OracleName }}</td>
+    </tr>
+    <tr>
+      <th>Oracle URL</th>
+      <td>{{ .OracleURL }}</td>
+    </tr>
+    <tr>
+      <th>Oracle Public Key</th>
+      <td>{{ .OraclePubKey }}</td>
+    </tr>
+    <tr>
+      <th>Oracle Rpoint</th>
+      <td>{{ .OracleRpoint }}</td>
+    </tr>
+  </table>
+
+  <hr>
+</div>
+<div class="container">
+<h3>Buy</h3>
+<form action="/buy" method="post">
+    Price: <input type="text" name="price" value="15001">
+    Quantity: <input type="text" name="quantity" value="1">
+    <input type="submit" value="Buy">
+</form>
+<hr>
+<h3>Sell</h3>
+<form action="/sell" method="post">
+    Price: <input type="text" name="price" value="15001">
+    Quantity: <input type="text" name="quantity" value="1">
+    <input type="submit" value="Sell">
+</form>
+<hr>
+</div>
+<div class="container">
+<h3>Orders</h3>
+<table id = "bids" class="table">
+  <h4>Bids</h4>
+  <tr>
+    <th>Price</th>
+    <th>Quantity</th>
+  </tr>
+  {{- range .Bids }}
+  <tr>
+  <td>{{ .Price }}</td>
+  <td>{{ .Quantity }}</td>
+  </tr>
+  {{- end}}
+</table>
+<table id = "asks" class="table">
+  <h4>Asks</h4>
+  <tr>
+    <th>Price</th>
+    <th>Quantity</th>
+  </tr>
+  {{- range .Asks }}
+  <tr>
+  <td>{{ .Price }}</td>
+  <td>{{ .Quantity }}</td>
+  </tr>
+  {{- end}}
+</table>
+</div>
+</main>
+</body>
+<footer>
+</footer>
+</html>

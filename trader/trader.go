@@ -97,7 +97,7 @@ func (t *Trader) SettleExpired() {
 
 	for _, c := range allContracts {
 		// contracts active, past settlement date
-		if c.Status == 6 && int(c.OracleTimestamp) < int(time.Now().Unix()) {
+		if c.Status == 5 && int(c.OracleTimestamp) < int(time.Now().Unix()) {
 			v, s := GetOracleSignature()
 			t.Lit.SettleContract(c.Idx, v, s)
 			fmt.Printf("Settle contract [%v] at %v satoshis\n", c.Idx, v)
@@ -119,4 +119,22 @@ func GetSettlementTime() (int) {
 
 func GetMargin() (int) {
 	return	config.GetInt("instrument.margin")
+}
+
+func (t *Trader) TraderFullAddress() (string) {
+	addr, err := t.Lit.GetLNAddress()
+	handleError(err)
+	return fmt.Sprintf("%s@%s:%d", addr, t.Host, t.Port)
+}
+
+func (t *Trader) GetLegacyAddress() (pubKey string) {
+  addr, err := t.Lit.GetAddresses(uint32(coinType), 0, true)
+  handleError(err)
+  return addr[0]
+}
+
+func (t *Trader) GetWitnessAddress() (pubKey string) {
+  addr, err := t.Lit.GetAddresses(uint32(coinType), 0, false)
+  handleError(err)
+  return addr[0]
 }

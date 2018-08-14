@@ -142,3 +142,11 @@ func (t *Trader) GetCurrentSpot() (int) {
 
 	return 0
 }
+
+func (t *Trader) GetOracleName() (string) {
+	return oracleName
+}
+
+func (t *Trader) GetOracleURL() (string) {
+	return oracleUrl
+}
